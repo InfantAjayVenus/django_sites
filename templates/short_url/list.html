@@ -1,0 +1,42 @@
+{% extends 'short_url/base.html' %} {% block main %}
+<div class="accordion" id="list">
+  {% for account,url_list in url_collection.items %}
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button
+        class="accordion-button text-capitalize"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#{{account}}"
+        aria-controls="{{account}}"
+      >
+        {{account}}
+      </button>
+    </h2>
+    <div
+      id="{{account}}"
+      class="accordion-collapse collapse show"
+      aria-labelledby="headingOne"
+      data-bs-parent="#list"
+    >
+      <div class="accordion-body">
+        <ul class="list-group">
+          {% for name,slug in url_list %}
+          <li class="list-group-item">
+            <a
+              href="{{slug}}"
+              class="active text-capitalize"
+              aria-current="true"
+              target="_blank"
+            >
+              {{name}}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock main %}
